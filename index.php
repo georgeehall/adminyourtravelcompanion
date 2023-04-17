@@ -166,7 +166,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <body>
     <div class="container">
 
-    <img src="images/logo2.png" style="padding-top:10px;">
+    <img src="images/logo2.png" class="img-fluid" style="padding-top:10px;">
         <p>Please fill in your credentials to login.</p>
 
         <?php 
