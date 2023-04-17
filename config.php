@@ -14,3 +14,9 @@ if($link === false){
     die("ERROR: Could not connect. " . mysqli_connect_error());
 }
 ?>
+
+
+define('DB_SERVER', 'db5012666464.hosting-data.io');
+define('DB_USERNAME', 'dbu1038230');
+define('DB_PASSWORD', '4JmqVgXMg5cRAE');
+define('DB_NAME', 'dbs10642292');

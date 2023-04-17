@@ -157,10 +157,14 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                 <tbody>
                     <?php
 			// Connect to the database
-            require_once 'config.php';
+            $conn = mysqli_connect("localhost", "root", "", "yourtravelcompanion");
+			// Check connection
+			if (!$conn) {
+				die("Connection failed: " . mysqli_connect_error());
+			}
 			// Select all rows from the flight_quotes table
 			$sql = "SELECT id, name, outbound_date, status FROM flight_quotes WHERE status='pending'";
-$result = mysqli_query($link, $sql);
+$result = mysqli_query($conn, $sql);
 
 // Loop through each row and display the data in the table
 while ($row = mysqli_fetch_assoc($result)) {
@@ -203,10 +207,14 @@ while ($row = mysqli_fetch_assoc($result)) {
                 <tbody>
                     <?php
 			// Connect to the database
-            require_once 'config.php';
+            $conn = mysqli_connect("localhost", "root", "", "yourtravelcompanion");
+			// Check connection
+			if (!$conn) {
+				die("Connection failed: " . mysqli_connect_error());
+			}
 			// Select all rows from the flight_quotes table
 			$sql = "SELECT id, name, checkin, status FROM hotel_quotes WHERE status='pending'";
-$result = mysqli_query($link, $sql);
+$result = mysqli_query($conn, $sql);
 
 // Loop through each row and display the data in the table
 while ($row = mysqli_fetch_assoc($result)) {
@@ -252,10 +260,14 @@ while ($row = mysqli_fetch_assoc($result)) {
                 <tbody>
                     <?php
 			// Connect to the database
-            require_once 'config.php';
+            $conn = mysqli_connect("localhost", "root", "", "yourtravelcompanion");
+			// Check connection
+			if (!$conn) {
+				die("Connection failed: " . mysqli_connect_error());
+			}
 			// Select all rows from the flight_quotes table
 			$sql = "SELECT id, name, destination, outbound_date, status FROM package_quotes WHERE status='pending'";
-$result = mysqli_query($link, $sql);
+$result = mysqli_query($conn, $sql);
 
 // Loop through each row and display the data in the table
 while ($row = mysqli_fetch_assoc($result)) {
