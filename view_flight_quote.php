@@ -97,11 +97,11 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-			<li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
-        </li>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
+                <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+        <!-- </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
@@ -125,7 +125,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="#">View Bookings</a>
-                    </li>
+                    </li> -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
@@ -148,14 +148,12 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 	if (isset($_GET["id"])) {
 		$id = $_GET["id"];
 		// Connect to the database
-        $conn = mysqli_connect("localhost", "root", "", "yourtravelcompanion"); 
-		// Check connection
-		if (!$conn) {
-			die("Connection failed: " . mysqli_connect_error());
-		}
+        // Include the database configuration file
+        require_once 'config.php';
+        
 		// Select the row with the matching ID value
 		$sql = "SELECT * FROM flight_quotes WHERE id = $id";
-		$result = mysqli_query($conn, $sql);
+		$result = mysqli_query($link, $sql);
 		// Check if a row was found
 		if (mysqli_num_rows($result) > 0) {
 			$row = mysqli_fetch_assoc($result);
