@@ -204,7 +204,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     $name = $row["name"];
     $checkin = date('d/m/Y', strtotime($row["checkin"])); // format date to UK format
     echo "<tr>";
-    echo "<td><a href='view.php?id=$id'>$id</a></td>";
+    echo "<td><a href='view_hotel_quote.php?id=$id'>$id</a></td>";
     echo "<td>$name</td>";
     echo "<td>$checkin</td>";
     echo "<td>";
@@ -258,7 +258,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     $destination = $row["destination"];
     $outbound_date = date('d/m/Y', strtotime($row["outbound_date"])); // format date to UK format
     echo "<tr>";
-    echo "<td><a href='view.php?id=$id'>$id</a></td>";
+    echo "<td><a href='view_package_quote.php?id=$id'>$id</a></td>";
     echo "<td>$name</td>";
     echo "<td>$destination</td>";
     echo "<td>$outbound_date</td>";
