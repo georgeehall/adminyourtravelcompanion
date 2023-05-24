@@ -165,8 +165,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
             <div class="card text-center">
                 <div class="card-header">Total Bookings</div>
                 <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <h5 class="card-title">3</h5>
+                    
                     <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
             </div>
@@ -176,8 +176,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 <div class="card text-center">
     <div class="card-header">Total Revenue</div>
     <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <h5 class="card-title">£4640.77</h5>
         <a href="#" class="btn btn-primary">Go somewhere</a>
     </div>
 </div>
