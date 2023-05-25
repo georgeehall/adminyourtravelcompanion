@@ -50,10 +50,6 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 ">Your Travel Companion</span>
             </a>
             <ul class="list-unstyled ps-0">
-                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a href="#" class="link-dark rounded">Dashboard</a></li>
-
-                </ul>
                 <li class="mb-1">
                     <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
                         data-bs-target="#dashboard-collapse" aria-expanded="false">
@@ -136,6 +132,33 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                     <div class="collapse" id="account-collapse4">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                             <li><a href="reset-password.php" class="link-dark rounded">British Airways</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="border-top my-3"></li>
+                <li class="mb-1">
+                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                        data-bs-target="#account-collapse5" aria-expanded="false">
+                        Supplier Info
+                    </button>
+                    <div class="collapse" id="account-collapse5">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li><a href="reset-password.php" class="link-dark rounded">Classic Packages</a></li>
+                        </ul>
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li><a href="reset-password.php" class="link-dark rounded">Major</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="border-top my-3"></li>
+                <li class="mb-1">
+                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                        data-bs-target="#account-collapse6" aria-expanded="false">
+                        Agent offers/rates
+                    </button>
+                    <div class="collapse" id="account-collapse6">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li><a href="reset-password.php" class="link-dark rounded">Accor</a></li>
                         </ul>
                     </div>
                 </li>
