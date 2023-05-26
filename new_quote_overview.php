@@ -25,9 +25,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@1,500&display=swap" rel="stylesheet">
     <link href="sidebars.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="sidebars.js"></script>
-
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
 
@@ -46,13 +45,14 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         <div class="flex-shrink-0 p-3 bg-white" style="width: 280px;">
             <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
                 <svg class="bi me-2" width="30" height="24">
-                    <a href="welcome.php">
+                    <use xlink:href="#bootstrap" />
                 </svg>
-                <span class="fs-5 fw-semibold" style="margin-left: -25px;
+                <span class="fs-5 fw-semibold" style="
+    margin-left: -25px;
 ">Your Travel Companion</span>
             </a>
             <ul class="list-unstyled ps-0">
-                <li><a href="welcome.php" class="link-dark rounded">Dashboard</a></li>
+            <li><a href="welcome.php" class="link-dark rounded">Dashboard</a></li>
                 <li class="mb-1">
                     <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
                         data-bs-target="#dashboard-collapse" aria-expanded="false">
@@ -183,74 +183,163 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         <div class="b-example-divider"></div>
 
         <div class="container" style="padding-top: 20px;">
-        <div class="container" style="padding-top: 20px;">
-        <?php
-	// Check if an ID value was passed as a URL parameter
-	if (isset($_GET["id"])) {
-		$id = $_GET["id"];
-		// Connect to the database
-        
-        // Include the database configuration file
-        require_once 'config.php';
-        
-		// Select the row with the matching ID value
-		$sql = "SELECT * FROM package_quotes WHERE id = $id";
-		$result = mysqli_query($link, $sql);
-		// Check if a row was found
-		if (mysqli_num_rows($result) > 0) {
-			$row = mysqli_fetch_assoc($result);
-			$name = $row["name"];
-			$email = $row["email"];
-			$phone = $row["phone"];
-			$destination = $row["destination"];
-			$perferred_hotel = $row["preferred_hotel"];
-			$board_basis = $row["board_basis"];
-			$outbound_date = date('d/m/Y', strtotime($row["outbound_date"])); // format date to UK format
-			$return_date = date('d/m/Y', strtotime($row["return_date"])); // format date to UK format
-			$travel_class = $row["travel_class"];
-			$preferred_airline = $row["preferred_airline"];
-			$adults = $row["adults"];
-			$children = $row["children"];
-			$infants = $row["infants"];
-			$rooms = $row["rooms"];
-			$car_hire = $row["car_hire"];
-			$transfers = $row["transfers"];
-			$total_budget = $row["total_budget"];
-			$message = $row["message"];
-			$status = $row["status"];
-			// Display the row data in a table
-			echo "<table class='table'>";
-			echo "<tr><th>ID</th><td>$id</td></tr>";
-			echo "<tr><th>Name</th><td>$name</td></tr>";
-			echo "<tr><th>Email</th><td>$email</td></tr>";
-			echo "<tr><th>Phone</th><td>$phone</td></tr>";
-			echo "<tr><th>Destination</th><td>$destination</td></tr>";
-			echo "<tr><th>perferred_hotel</th><td>$perferred_hotel</td></tr>";
-			echo "<tr><th>board_basis</th><td>$board_basis</td></tr>";
-			echo "<tr><th>Outbound Date</th><td>$outbound_date</td></tr>";
-			echo "<tr><th>Return Date</th><td>$return_date</td></tr>";
-			echo "<tr><th>Travel Class</th><td>$travel_class</td></tr>";
-			echo "<tr><th>Preferred Airline</th><td>$preferred_airline</td></tr>";
-			echo "<tr><th>Adults</th><td>$adults</td></tr>";
-			echo "<tr><th>Children</th><td>$children</td></tr>";
-			echo "<tr><th>Infants</th><td>$infants</td></tr>";
-			echo "<tr><th>Rooms</th><td>$rooms</td></tr>";
-			echo "<tr><th>Car Hire</th><td>$car_hire</td></tr>";
-			echo "<tr><th>Transfers</th><td>$transfers</td></tr>";
-			echo "<tr><th>Budget</th><td>$total_budget</td></tr>";
-			echo "<tr><th>Message</th><td>$message</td></tr>";
-			echo "<tr><th>Status</th><td>$status</td></tr>";
-			echo "</table>";
-		} else {
-			// If no row was found, display an error message
-			echo "<p>Invalid ID value. Please try again.</p>";
-		}
-		// Close the database connection
-		mysqli_close($conn);
-    }
-		?>
-           
+
+<h1>Quotes Overivew</h1>
+
+
+            <div class="col-md-12">
+                <h1 class="mb-3">Flight Quotes</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Departure Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+			// Connect to the database
+            $conn = mysqli_connect("localhost", "root", "", "yourtravelcompanion");
+			// Check connection
+			if (!$conn) {
+				die("Connection failed: " . mysqli_connect_error());
+			}
+			// Select all rows from the flight_quotes table
+			$sql = "SELECT id, name, outbound_date, status FROM flight_quotes WHERE status='pending'";
+$result = mysqli_query($conn, $sql);
+
+// Loop through each row and display the data in the table
+while ($row = mysqli_fetch_assoc($result)) {
+    $id = $row["id"];
+    $name = $row["name"];
+    $outbound_date = date('d/m/Y', strtotime($row["outbound_date"])); // format date to UK format
+    echo "<tr>";
+    echo "<td><a href='view_flight_quote.php?id=$id'>$id</a></td>";
+    echo "<td>$name</td>";
+    echo "<td>$outbound_date</td>";
+    echo "<td>";
+    echo "<form method='post' action='update_flight_status.php'>";
+    echo "<input type='hidden' name='id' value='" . $row["id"] . "'>";
+    echo "<select name='status' onchange='this.form.submit()'>";
+    echo "<option value='pending' " . ($row["status"] == "pending" ? "selected" : "") . ">Pending</option>";
+    echo "<option value='sent' " . ($row["status"] == "sent" ? "selected" : "") . ">Sent</option>";
+    echo "<option value='closed' " . ($row["status"] == "closed" ? "selected" : "") . ">Closed</option>";
+    echo "</select>";
+    echo "</form>";
+    echo "</td>";
+    echo "</tr>";
+}
+			// Close the database connection
+			mysqli_close($conn);
+			?>
+                    </tbody>
+                </table>
             </div>
+            <div class="col-md-12">
+                <h1 class="mb-3">Hotel Quotes</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Check In Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+			// Connect to the database
+            $conn = mysqli_connect("localhost", "root", "", "yourtravelcompanion");
+			// Check connection
+			if (!$conn) {
+				die("Connection failed: " . mysqli_connect_error());
+			}
+			// Select all rows from the flight_quotes table
+			$sql = "SELECT id, name, checkin, status FROM hotel_quotes WHERE status='pending'";
+$result = mysqli_query($conn, $sql);
+
+// Loop through each row and display the data in the table
+while ($row = mysqli_fetch_assoc($result)) {
+    $id = $row["id"];
+    $name = $row["name"];
+    $checkin = date('d/m/Y', strtotime($row["checkin"])); // format date to UK format
+    echo "<tr>";
+    echo "<td><a href='view_hotel_quote.php?id=$id'>$id</a></td>";
+    echo "<td>$name</td>";
+    echo "<td>$checkin</td>";
+    echo "<td>";
+    echo "<form method='post' action='update_hotel_status.php'>";
+    echo "<input type='hidden' name='id' value='" . $row["id"] . "'>";
+    echo "<select name='status' onchange='this.form.submit()'>";
+    echo "<option value='pending' " . ($row["status"] == "pending" ? "selected" : "") . ">Pending</option>";
+    echo "<option value='sent' " . ($row["status"] == "sent" ? "selected" : "") . ">Sent</option>";
+    echo "<option value='closed' " . ($row["status"] == "closed" ? "selected" : "") . ">Closed</option>";
+    echo "</select>";
+    echo "</form>";
+    echo "</td>";
+    echo "</tr>";
+}			
+			// Close the database connection
+			mysqli_close($conn);
+			?>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-md-12">
+                <h1 class="mb-3">Package Quotes</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Outbound Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+			// Connect to the database
+            $conn = mysqli_connect("localhost", "root", "", "yourtravelcompanion");
+			// Check connection
+			if (!$conn) {
+				die("Connection failed: " . mysqli_connect_error());
+			}
+			// Select all rows from the flight_quotes table
+			$sql = "SELECT id, name, outbound_date, status FROM package_quotes WHERE status='pending'";
+$result = mysqli_query($conn, $sql);
+
+// Loop through each row and display the data in the table
+while ($row = mysqli_fetch_assoc($result)) {
+    $id = $row["id"];
+    $name = $row["name"];
+    $outbound_date = date('d/m/Y', strtotime($row["outbound_date"])); // format date to UK format
+    echo "<tr>";
+    echo "<td><a href='view_package_quote.php?id=$id'>$id</a></td>";
+    echo "<td>$name</td>";
+    echo "<td>$outbound_date</td>";
+    echo "<td>";
+    echo "<form method='post' action='update_package_status.php'>";
+    echo "<input type='hidden' name='id' value='" . $row["id"] . "'>";
+    echo "<select name='status' onchange='this.form.submit()'>";
+    echo "<option value='pending' " . ($row["status"] == "pending" ? "selected" : "") . ">Pending</option>";
+    echo "<option value='sent' " . ($row["status"] == "sent" ? "selected" : "") . ">Sent</option>";
+    echo "<option value='closed' " . ($row["status"] == "closed" ? "selected" : "") . ">Closed</option>";
+    echo "</select>";
+    echo "</form>";
+    echo "</td>";
+    echo "</tr>";
+}			
+			// Close the database connection
+			mysqli_close($conn);
+			?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </div>
 
     </main>
 
