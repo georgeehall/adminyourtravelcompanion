@@ -183,65 +183,63 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
         <div class="container" style="padding-top: 20px;">
 
-            <div class="row">
-                <div class="col-md-4">
-
-                    <div class="card text-center">
-                        <div class="card-header">Total Bookings</div>
-                        <div class="card-body">
-                            <h5 class="card-title">3</h5>
-
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-
-                    <div class="card text-center">
-                        <div class="card-header">Total Revenue</div>
-                        <div class="card-body">
-                            <h5 class="card-title">£4640.77</h5>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-
-                    <div class="card text-center">
-                        <div class="card-header">Total Commission</div>
-                        <div class="card-body">
-                            <h5 class="card-title">483.02</h5>
+        <form method="post" action="inserthotelquote.php">
+                             
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                           
+                             
+                                <label for="email" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
                             
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-
-                    <div class="card text-center">
-                        <div class="card-header">Pending Quotes</div>
-                        <div class="card-body">
-                            <h5 class="card-title">0</h5>
+                             
+                                <label for="phone" class="form-label">Phone number</label>
+                                <input type="tel" class="form-control" id="phone" name="phone" required>
                             
-                            </p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
+                             
+                                <label for="destination" class="form-label">Destination</label>
+                                <input type="text" class="form-control" id="destination" name="destination" required>
+                           
+                             
+                                <label for="checkin" class="form-label">Check-in date</label>
+                                <input type="date" class="form-control" id="checkin" name="checkin" required>
+                            
+                             
+                                <label for="checkout" class="form-label">Check-out date</label>
+                                <input type="date" class="form-control" id="checkout" name="checkout" required>
+                            
+                             
+                                <label for="board_basis" class="form-label">Board Basis</label>
+                                <select class="form-select" id="board_basis" name="board_basis" required>
+                                    <option value="">Select board basis...</option>
+                                    <option value="room_only">Room Only</option>
+                                    <option value="bed_and_breakfast">Bed and Breakfast</option>
+                                    <option value="half_board">Half Board</option>
+                                    <option value="full_board">Full Board</option>
+                                    <option value="all_inclusive">All Inclusive</option>
+                                </select>
+                            
 
-<div class="card text-center">
-    <div class="card-header">Sent Quotes</div>
-    <div class="card-body">
-        <h5 class="card-title">9</h5>
-     
-        </p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
-</div>
-                </div>
-            </div>
+                             
+                                <label for="adults" class="form-label">Number of adults</label>
+                                <input type="number" class="form-control" id="adults" name="adults" required>
+                         
+                             
+                                <label for="children" class="form-label">Number of children</label>
+                                <input type="number" class="form-control" id="children" name="children" required>
+                            
+                             
+                                <label for="infants" class="form-label">Number of infants</label>
+                                <input type="number" class="form-control" id="infants" name="infants" required>
+                            
+                             
+                                <label for="message" class="form-label">Additional information</label>
+                                <textarea class="form-control" id="message" name="message" rows="3" ></textarea>
+                          
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+
+        </div>
 
     </main>
 

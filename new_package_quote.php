@@ -183,65 +183,115 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
         <div class="container" style="padding-top: 20px;">
 
-            <div class="row">
-                <div class="col-md-4">
-
-                    <div class="card text-center">
-                        <div class="card-header">Total Bookings</div>
-                        <div class="card-body">
-                            <h5 class="card-title">3</h5>
-
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-
-                    <div class="card text-center">
-                        <div class="card-header">Total Revenue</div>
-                        <div class="card-body">
-                            <h5 class="card-title">£4640.77</h5>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-
-                    <div class="card text-center">
-                        <div class="card-header">Total Commission</div>
-                        <div class="card-body">
-                            <h5 class="card-title">483.02</h5>
+        <form method="post" action="insertpackagequote.php">
+                             <div class="row">
+                                <div class="col-md-3">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+</div>  
+<div class="col-md-3">
+                                <label for="email" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                                </div>                  
+                                <div class="col-md-3">
+                                <label for="phone" class="form-label">Phone number</label>
+                                <input type="tel" class="form-control" id="phone" name="phone" required>
+                                </div>  
+                                <div class="col-md-3">
+                                <label for="destination" class="form-label">Destination</label>
+                                <input type="text" class="form-control" id="destination" name= "destination" required>
+                                </div>  
+                        
+                                
+                                <div class="col-md-3">      
+                                <label for="preferred_hotel" class="form-label">Preferred Hotel</label>
+                                <input type="text" class="form-control" id="preferred_hotel" name="preferred_hotel">
+                                </div> 
                             
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
+                                <div class="col-md-3">  
+                                <label for="board_basis" class="form-label">Board Basis</label>
+                                <select class="form-select" id="board_basis" name="board_basis" required>
+                                    <option value="">Select board basis...</option>
+                                    <option value="room_only">Room Only</option>
+                                    <option value="bed_and_breakfast">Bed and Breakfast</option>
+                                    <option value="half_board">Half Board</option>
+                                    <option value="full_board">Full Board</option>
+                                    <option value="all_inclusive">All Inclusive</option>
+                                </select>
+                                </div> 
+                                <div class="col-md-3">  
+                                <label for="outbound_date" class="form-label">Outbound date</label>
+                                <input type="date" class="form-control" id="outbound_date" name="outbound_date" required>
+                                </div> 
+                                <div class="col-md-3">  
+                                <label for="return_date" class="form-label">Return date</label>
+                                <input type="date" class="form-control" id="return_date" name="return_date" required>
+                                </div> 
+                                <div class="col-md-3">  
+                                <label for="travel_class" class="form-label">Travel Class</label>
+                                <select class="form-select" id="travel_class" name="travel_class" required>
+                                    <option value="">Select travel class...</option>
+                                    <option value="economy">Economy</option>
+                                    <option value="premium_economy">Premium Econony</option>
+                                    <option value="business_class">Business Class</option>
+                                    <option value="first_class">First Class</option>
+                                    <option value="all_inclusive">Other (Put details in Additional info)</option>
+                                </select>
+                                </div>
 
-                <div class="col-md-4">
+                                <div class="col-md-3">  
+                                <label for="preferred_airline" class="form-label">Preferred Airline</label>
+                                <input type="text" class="form-control" id="preferred_airline" name="preferred_airline">
+                                </div>
+                                <div class="col-md-3">  
+                                <label for="adults" class="form-label">Number of adults</label>
+                                <input type="number" class="form-control" id="adults" name="adults" required>
+                                </div>
+                                <div class="col-md-3">  
+                                <label for="children" class="form-label">Number of children</label>
+                                <input type="number" class="form-control" id="children" name="children" required>
+                                </div>
+                                <div class="col-md-3">  
+                                <label for="infants" class="form-label">Number of infants</label>
+                                <input type="number" class="form-control" id="infants" name="infants" required>
+                                </div>
 
-                    <div class="card text-center">
-                        <div class="card-header">Pending Quotes</div>
-                        <div class="card-body">
-                            <h5 class="card-title">0</h5>
-                            
-                            </p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
+                                <div class="col-md-3">  
+                                <label for="rooms" class="form-label">Number of rooms</label>
+                                <input type="number" class="form-control" id="rooms" name="rooms" required>
+                                </div>
 
-<div class="card text-center">
-    <div class="card-header">Sent Quotes</div>
-    <div class="card-body">
-        <h5 class="card-title">9</h5>
-     
-        </p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
+                                <div class="col-md-3">  
+                                <label for="car_hire" class="form-label">Require Car Hire?</label>
+                                <select class="form-select" id="car_hire" name="car_hire" required>
+                                    <option value="">Select if you require car hire</option>
+                                    <option value="yes">Yes</option>
+                                    <option value="no">No</option>
+                                </select>
+                                </div>
+                                <div class="col-md-3">  
+                                <label for="transfers" class="form-label">Require transfers? </label>
+                                <select class="form-select" id="transfers" name="transfers" required>
+                                    <option value="">Select if you require transfers, we only offer private, add to notes if you want shared</option>
+                                    <option value="yes">Yes</option>
+                                    <option value="no">No</option>
+                                </select>
+                                </div>
+
+                                <div class="col-md-3">  
+                                <label for="total_budget" class="form-label">Total Budget</label>
+                                <input type="text" class="form-control" id="total_budget" name="total_budget">
+                                </div>
+                                <div class="col-md-9">  
+                                <label for="message" class="form-label">Additional information</label>
+                                <textarea class="form-control" id="message" name="message" rows="3" placeholder="Add here if you have any special requests or preferred room types, anything that can make your holiday better. Is it special occassion tell us!"></textarea>
+                                </div>
+                                <div class="col-md-3"> 
+                            <button type="submit" class="btn btn-primary">Submit</button>
 </div>
-                </div>
-            </div>
+                        </form>
+
+        </div>
 
     </main>
 

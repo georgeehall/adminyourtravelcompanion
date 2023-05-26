@@ -183,65 +183,65 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
         <div class="container" style="padding-top: 20px;">
 
-            <div class="row">
-                <div class="col-md-4">
-
-                    <div class="card text-center">
-                        <div class="card-header">Total Bookings</div>
-                        <div class="card-body">
-                            <h5 class="card-title">3</h5>
-
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-
-                    <div class="card text-center">
-                        <div class="card-header">Total Revenue</div>
-                        <div class="card-body">
-                            <h5 class="card-title">£4640.77</h5>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-
-                    <div class="card text-center">
-                        <div class="card-header">Total Commission</div>
-                        <div class="card-body">
-                            <h5 class="card-title">483.02</h5>
+        <form method="post" action="insertflightquote.php">
+                             
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                        
+                             
+                                <label for="email" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                       
+                                <label for="phone" class="form-label">Phone number</label>
+                                <input type="tel" class="form-control" id="phone" name="phone" required>
                             
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-
-                    <div class="card text-center">
-                        <div class="card-header">Pending Quotes</div>
-                        <div class="card-body">
-                            <h5 class="card-title">0</h5>
+                             
+                                <label for="destination" class="form-label">Destination</label>
+                                <input type="text" class="form-control" id="destination" name="destination" required>
+                         
+                             
+                                <label for="outbound_date" class="form-label">Outbound date</label>
+                                <input type="date" class="form-control" id="outbound_date" name="outbound_date" required>
                             
-                            </p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
+                             
+                                <label for="return_date" class="form-label">Return date</label>
+                                <input type="date" class="form-control" id="return_date" name="return_date" required>
+                          
+                             
+                                <label for="travel_class" class="form-label">Travel Class</label>
+                                <select class="form-select" id="travel_class" name="travel_class" required>
+                                    <option value="">Select travel class...</option>
+                                    <option value="economy">Economy</option>
+                                    <option value="premium_economy">Premium Econony</option>
+                                    <option value="business_class">Business Class</option>
+                                    <option value="first_class">First Class</option>
+                                    <option value="all_inclusive">Other (Put details in Additional info)</option>
+                                </select>
+                            
 
-<div class="card text-center">
-    <div class="card-header">Sent Quotes</div>
-    <div class="card-body">
-        <h5 class="card-title">9</h5>
-     
-        </p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
-</div>
-                </div>
-            </div>
+                             
+                                <label for="preferred_airline" class="form-label">Preferred Airline</label>
+                                <input type="text" class="form-control" id="preferred_airline" name="preferred_airline">
+                          
+                             
+                                <label for="adults" class="form-label">Number of adults</label>
+                                <input type="number" class="form-control" id="adults" name="adults" required>
+                           
+                             
+                                <label for="children" class="form-label">Number of children</label>
+                                <input type="number" class="form-control" id="children" name="children" required>
+                           
+                                <label for="infants" class="form-label">Number of infants</label>
+                                <input type="number" class="form-control" id="infants" name="infants" required>
+                          
+                             
+                                <label for="message" class="form-label">Additional information</label>
+                                <textarea class="form-control" id="message" name="message" rows="3"></textarea>
+                       
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+
+        </div>
 
     </main>
 
