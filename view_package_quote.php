@@ -183,7 +183,6 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         <div class="b-example-divider"></div>
 
         <div class="container" style="padding-top: 20px;">
-        <div class="container" style="padding-top: 20px;">
         <?php
 	// Check if an ID value was passed as a URL parameter
 	if (isset($_GET["id"])) {

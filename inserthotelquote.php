@@ -39,7 +39,7 @@ $sql = "INSERT INTO hotel_quotes (name, email, phone, destination, checkin, chec
 
 // Execute the query and check if it was successful
 if (mysqli_query($link, $sql)) {
-  header("Location: welcome.php?thankyou=true");
+  header("Location: welcome.php");
   exit();
 } else {
   echo "Error: " . $sql . "<br>" . mysqli_error($link);

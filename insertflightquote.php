@@ -41,7 +41,7 @@ $sql = "INSERT INTO flight_quotes (name, email, phone, destination, preferred_ai
 
 // Execute the query and check if it was successful
 if (mysqli_query($link, $sql)) {
-  header("Location: index.php?thankyou=true");
+  header("Location: welcome.php");
   exit();
 } else {
   echo "Error: " . $sql . "<br>" . mysqli_error($link);
