@@ -12,8 +12,8 @@ if (mysqli_query($link, $sql)) {
     header("Location: welcome.php");
 } else {
     // If there was an error, display an error message
-    echo "Error updating record: " . mysqli_error($conn);
+    echo "Error updating record: " . mysqli_error($link);
 }
 // Close the database connection
-mysqli_close($conn);
+mysqli_close($link);
 ?>
