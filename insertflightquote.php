@@ -1,16 +1,6 @@
 <?php
-// Step 1: Establish a database connection
-$host = "localhost";
-$user = "root";
-$password = "";
-$database = "yourtravelcompanion";
-
-$connection = mysqli_connect($host, $user, $password, $database);
-
-// Check if the connection was successful
-if (!$connection) {
-  die("Connection failed: " . mysqli_connect_error());
-}
+// Step 1: Include the config.php file
+require_once 'config.php';
 
 // Step 2: Process form data and insert into database table
 $name = $_POST['name'] ?? '';
@@ -27,18 +17,18 @@ $infants = $_POST['infants'] ?? '';
 $message = $_POST['message'] ?? '';
 
 // Escape special characters to prevent SQL injection
-$name = mysqli_real_escape_string($connection, $name);
-$email = mysqli_real_escape_string($connection, $email);
-$phone = mysqli_real_escape_string($connection, $phone);
-$destination = mysqli_real_escape_string($connection, $destination);
-$outbound_date = mysqli_real_escape_string($connection, $outbound_date);
-$return_date = mysqli_real_escape_string($connection, $return_date);
-$travel_class = mysqli_real_escape_string($connection, $travel_class);
-$preferred_airline = mysqli_real_escape_string($connection, $preferred_airline);
-$adults = mysqli_real_escape_string($connection, $adults);
-$children = mysqli_real_escape_string($connection, $children);
-$infants = mysqli_real_escape_string($connection, $infants);
-$message = mysqli_real_escape_string($connection, $message);
+$name = mysqli_real_escape_string($link, $name);
+$email = mysqli_real_escape_string($link, $email);
+$phone = mysqli_real_escape_string($link, $phone);
+$destination = mysqli_real_escape_string($link, $destination);
+$outbound_date = mysqli_real_escape_string($link, $outbound_date);
+$return_date = mysqli_real_escape_string($link, $return_date);
+$travel_class = mysqli_real_escape_string($link, $travel_class);
+$preferred_airline = mysqli_real_escape_string($link, $preferred_airline);
+$adults = mysqli_real_escape_string($link, $adults);
+$children = mysqli_real_escape_string($link, $children);
+$infants = mysqli_real_escape_string($link, $infants);
+$message = mysqli_real_escape_string($link, $message);
 
 // Check if any required fields are empty
 if (empty($name) || empty($email) || empty($phone)) {
@@ -50,12 +40,13 @@ $sql = "INSERT INTO flight_quotes (name, email, phone, destination, preferred_ai
         VALUES ('$name', '$email', '$phone', '$destination', '$preferred_airline', '$outbound_date', '$return_date', '$travel_class', '$adults', '$children', '$infants', '$message')";
 
 // Execute the query and check if it was successful
-if (mysqli_query($connection, $sql)) {
+if (mysqli_query($link, $sql)) {
   header("Location: index.php?thankyou=true");
   exit();
 } else {
-  echo "Error: " . $sql . "<br>" . mysqli_error($connection);
+  echo "Error: " . $sql . "<br>" . mysqli_error($link);
 }
 
 // Step 3: Close the database connection
-mysqli_close($connection);
+mysqli_close($link);
+?>

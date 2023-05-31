@@ -1,17 +1,6 @@
 <?php
-// Step 1: Establish a database connection
-$host = "localhost";
-$user = "root";
-$password = "";
-$database = "yourtravelcompanion";
-
-$connection = mysqli_connect($host, $user, $password, $database);
-
-// Check if the connection was successful
-if (!$connection) {
-  die("Connection failed: " . mysqli_connect_error());
-}
-
+// Step 1: Include the config.php file
+require_once 'config.php';
 // Step 2: Process form data and insert into database table
 $name = $_POST['name'] ?? '';
 $email = $_POST['email'] ?? '';
@@ -26,17 +15,17 @@ $infants = $_POST['infants'] ?? '';
 $message = $_POST['message'] ?? '';
 
 // Escape special characters to prevent SQL injection
-$name = mysqli_real_escape_string($connection, $name);
-$email = mysqli_real_escape_string($connection, $email);
-$phone = mysqli_real_escape_string($connection, $phone);
-$destination = mysqli_real_escape_string($connection, $destination);
-$checkin = mysqli_real_escape_string($connection, $checkin);
-$checkout = mysqli_real_escape_string($connection, $checkout);
-$board_basis = mysqli_real_escape_string($connection, $board_basis);
-$adults = mysqli_real_escape_string($connection, $adults);
-$children = mysqli_real_escape_string($connection, $children);
-$infants = mysqli_real_escape_string($connection, $infants);
-$message = mysqli_real_escape_string($connection, $message);
+$name = mysqli_real_escape_string($link, $name);
+$email = mysqli_real_escape_string($link, $email);
+$phone = mysqli_real_escape_string($link, $phone);
+$destination = mysqli_real_escape_string($link, $destination);
+$checkin = mysqli_real_escape_string($link, $checkin);
+$checkout = mysqli_real_escape_string($link, $checkout);
+$board_basis = mysqli_real_escape_string($link, $board_basis);
+$adults = mysqli_real_escape_string($link, $adults);
+$children = mysqli_real_escape_string($link, $children);
+$infants = mysqli_real_escape_string($link, $infants);
+$message = mysqli_real_escape_string($link, $message);
 
 // Check if any required fields are empty
 if (empty($name) || empty($email) || empty($phone)) {
@@ -49,14 +38,14 @@ $sql = "INSERT INTO hotel_quotes (name, email, phone, destination, checkin, chec
         VALUES ('$name', '$email', '$phone', '$destination', '$checkin', '$checkout', '$board_basis', '$adults', '$children', '$infants', '$message')";
 
 // Execute the query and check if it was successful
-if (mysqli_query($connection, $sql)) {
+if (mysqli_query($link, $sql)) {
   header("Location: welcome.php?thankyou=true");
   exit();
 } else {
-  echo "Error: " . $sql . "<br>" . mysqli_error($connection);
+  echo "Error: " . $sql . "<br>" . mysqli_error($link);
 }
 
 
-// Step 3: Close the database connection
-mysqli_close($connection);
+// Step 3: Close the database link
+mysqli_close($link);
 ?>
