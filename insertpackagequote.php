@@ -13,24 +13,24 @@ if (!$connection) {
 }
 
 // Step 2: Process form data and insert into database table
-$name = $_POST['name'];
-$email = $_POST['email'];
-$phone = $_POST['phone'];
-$destination = $_POST['destination'];
-$preferred_hotel = $_POST['preferred_hotel'];
-$board_basis = $_POST['board_basis'];
-$outbound_date = $_POST['outbound_date'];
-$return_date = $_POST['return_date'];
-$travel_class = $_POST['travel_class'];
-$preferred_airline = $_POST['preferred_airline'];
-$adults = $_POST['adults'];
-$children = $_POST['children'];
-$infants = $_POST['infants'];
-$rooms = $_POST['rooms'];
-$car_hire = $_POST['car_hire'];
-$transfers = $_POST['transfers'];
-$total_budget = $_POST['total_budget'];
-$message = $_POST['message'];
+$name = $_POST['name'] ?? '';
+$email = $_POST['email'] ?? '';
+$phone = $_POST['phone'] ?? '';
+$destination = $_POST['destination'] ?? '';
+$preferred_hotel = $_POST['preferred_hotel'] ?? '';
+$board_basis = $_POST['board_basis'] ?? '';
+$outbound_date = $_POST['outbound_date'] ?? '';
+$return_date = $_POST['return_date'] ?? '';
+$travel_class = $_POST['travel_class'] ?? '';
+$preferred_airline = $_POST['preferred_airline'] ?? '';
+$adults = $_POST['adults'] ?? '';
+$children = $_POST['children'] ?? '';
+$infants = $_POST['infants'] ?? '';
+$rooms = $_POST['rooms'] ?? '';
+$car_hire = $_POST['car_hire'] ?? '';
+$transfers = $_POST['transfers'] ?? '';
+$total_budget = $_POST['total_budget'] ?? '';
+$message = $_POST['message'] ?? '';
 
 // Escape special characters to prevent SQL injection
 $name = mysqli_real_escape_string($connection, $name);
@@ -51,6 +51,11 @@ $car_hire = mysqli_real_escape_string($connection, $car_hire);
 $transfers = mysqli_real_escape_string($connection, $transfers);
 $total_budget =mysqli_real_escape_string($connection, $total_budget);
 $message = mysqli_real_escape_string($connection, $message);
+
+// Check if any required fields are empty
+if (empty($name) || empty($email) || empty($phone)) {
+  die("Error: Required fields are missing.");
+}
 
 // Construct the SQL query
 // Construct the SQL query

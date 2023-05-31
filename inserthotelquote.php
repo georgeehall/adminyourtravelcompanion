@@ -13,17 +13,17 @@ if (!$connection) {
 }
 
 // Step 2: Process form data and insert into database table
-$name = $_POST['name'];
-$email = $_POST['email'];
-$phone = $_POST['phone'];
-$destination = $_POST['destination'];
-$checkin = $_POST['checkin'];
-$checkout = $_POST['checkout'];
-$board_basis = $_POST['board_basis'];
-$adults = $_POST['adults'];
-$children = $_POST['children'];
-$infants = $_POST['infants'];
-$message = $_POST['message'];
+$name = $_POST['name'] ?? '';
+$email = $_POST['email'] ?? '';
+$phone = $_POST['phone'] ?? '';
+$destination = $_POST['destination'] ?? '';
+$checkin = $_POST['checkin'] ?? '';
+$checkout = $_POST['checkout'] ?? '';
+$board_basis = $_POST['board_basis'] ?? '';
+$adults = $_POST['adults'] ?? '';
+$children = $_POST['children'] ?? '';
+$infants = $_POST['infants'] ?? '';
+$message = $_POST['message'] ?? '';
 
 // Escape special characters to prevent SQL injection
 $name = mysqli_real_escape_string($connection, $name);
@@ -37,6 +37,12 @@ $adults = mysqli_real_escape_string($connection, $adults);
 $children = mysqli_real_escape_string($connection, $children);
 $infants = mysqli_real_escape_string($connection, $infants);
 $message = mysqli_real_escape_string($connection, $message);
+
+// Check if any required fields are empty
+if (empty($name) || empty($email) || empty($phone)) {
+  die("Error: Required fields are missing.");
+}
+
 
 // Construct the SQL query
 $sql = "INSERT INTO hotel_quotes (name, email, phone, destination, checkin, checkout, board_basis, adults, children, infants, message) 
