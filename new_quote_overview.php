@@ -1,6 +1,9 @@
 <?php
 // Initialize the session
 session_start();
+
+// Include the config.php file
+require_once "config.php";
  
 // Check if the user is logged in, if not then redirect him to login page
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
@@ -182,160 +185,150 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
         <div class="container" style="padding-top: 20px;">
 
-<h1>Quotes Overivew</h1>
+        <h1>Quotes Overview</h1>
 
 
-            <div class="col-md-12">
-                <h1 class="mb-3">Flight Quotes</h1>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Departure Date</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-			// Connect to the database
-            $conn = mysqli_connect("localhost", "root", "", "yourtravelcompanion");
-			// Check connection
-			if (!$conn) {
-				die("Connection failed: " . mysqli_connect_error());
-			}
-			// Select all rows from the flight_quotes table
-			$sql = "SELECT id, name, outbound_date, status FROM flight_quotes WHERE status='pending'";
-$result = mysqli_query($conn, $sql);
+<div class="col-md-12">
+    <h1 class="mb-3">Flight Quotes</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Departure Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            // Select all rows from the flight_quotes table
+            $sql = "SELECT id, name, outbound_date, status FROM flight_quotes WHERE status='pending'";
+            $result = mysqli_query($link, $sql);
 
-// Loop through each row and display the data in the table
-while ($row = mysqli_fetch_assoc($result)) {
-    $id = $row["id"];
-    $name = $row["name"];
-    $outbound_date = date('d/m/Y', strtotime($row["outbound_date"])); // format date to UK format
-    echo "<tr>";
-    echo "<td><a href='view_flight_quote.php?id=$id'>$id</a></td>";
-    echo "<td>$name</td>";
-    echo "<td>$outbound_date</td>";
-    echo "<td>";
-    echo "<form method='post' action='update_flight_status.php'>";
-    echo "<input type='hidden' name='id' value='" . $row["id"] . "'>";
-    echo "<select name='status' onchange='this.form.submit()'>";
-    echo "<option value='pending' " . ($row["status"] == "pending" ? "selected" : "") . ">Pending</option>";
-    echo "<option value='sent' " . ($row["status"] == "sent" ? "selected" : "") . ">Sent</option>";
-    echo "<option value='closed' " . ($row["status"] == "closed" ? "selected" : "") . ">Closed</option>";
-    echo "</select>";
-    echo "</form>";
-    echo "</td>";
-    echo "</tr>";
-}
-			// Close the database connection
-			mysqli_close($conn);
-			?>
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-md-12">
-                <h1 class="mb-3">Hotel Quotes</h1>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Check In Date</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-			// Connect to the database
-            $conn = mysqli_connect("localhost", "root", "", "yourtravelcompanion");
-			// Check connection
-			if (!$conn) {
-				die("Connection failed: " . mysqli_connect_error());
-			}
-			// Select all rows from the flight_quotes table
-			$sql = "SELECT id, name, checkin, status FROM hotel_quotes WHERE status='pending'";
-$result = mysqli_query($conn, $sql);
+            // Loop through each row and display the data in the table
+            while ($row = mysqli_fetch_assoc($result)) {
+                $id = $row["id"];
+                $name = $row["name"];
+                $outbound_date = date('d/m/Y', strtotime($row["outbound_date"])); // format date to UK format
+                echo "<tr>";
+                echo "<td><a href='view_flight_quote.php?id=$id'>$id</a></td>";
+                echo "<td>$name</td>";
+                echo "<td>$outbound_date</td>";
+                echo "<td>";
+                echo "<form method='post' action='update_flight_status.php'>";
+                echo "<input type='hidden' name='id' value='" . $row["id"] . "'>";
+                echo "<select name='status' onchange='this.form.submit()'>";
+                echo "<option value='pending' " . ($row["status"] == "pending" ? "selected" : "") . ">Pending</option>";
+                echo "<option value='sent' " . ($row["status"] == "sent" ? "selected" : "") . ">Sent</option>";
+                echo "<option value='closed' " . ($row["status"] == "closed" ? "selected" : "") . ">Closed</option>";
+                echo "</select>";
+                echo "</form>";
+                echo "</td>";
+                echo "</tr>";
+            }
 
-// Loop through each row and display the data in the table
-while ($row = mysqli_fetch_assoc($result)) {
-    $id = $row["id"];
-    $name = $row["name"];
-    $checkin = date('d/m/Y', strtotime($row["checkin"])); // format date to UK format
-    echo "<tr>";
-    echo "<td><a href='view_hotel_quote.php?id=$id'>$id</a></td>";
-    echo "<td>$name</td>";
-    echo "<td>$checkin</td>";
-    echo "<td>";
-    echo "<form method='post' action='update_hotel_status.php'>";
-    echo "<input type='hidden' name='id' value='" . $row["id"] . "'>";
-    echo "<select name='status' onchange='this.form.submit()'>";
-    echo "<option value='pending' " . ($row["status"] == "pending" ? "selected" : "") . ">Pending</option>";
-    echo "<option value='sent' " . ($row["status"] == "sent" ? "selected" : "") . ">Sent</option>";
-    echo "<option value='closed' " . ($row["status"] == "closed" ? "selected" : "") . ">Closed</option>";
-    echo "</select>";
-    echo "</form>";
-    echo "</td>";
-    echo "</tr>";
-}			
-			// Close the database connection
-			mysqli_close($conn);
-			?>
-                    </tbody>
-                </table>
-            </div>
+            // Close the result set
+            mysqli_free_result($result);
+            ?>
+        </tbody>
+    </table>
+</div>
 
-            <div class="col-md-12">
-                <h1 class="mb-3">Package Quotes</h1>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Outbound Date</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-			// Connect to the database
-            $conn = mysqli_connect("localhost", "root", "", "yourtravelcompanion");
-			// Check connection
-			if (!$conn) {
-				die("Connection failed: " . mysqli_connect_error());
-			}
-			// Select all rows from the flight_quotes table
-			$sql = "SELECT id, name, outbound_date, status FROM package_quotes WHERE status='pending'";
-$result = mysqli_query($conn, $sql);
+<div class="col-md-12">
+    <h1 class="mb-3">Hotel Quotes</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Check In Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            // Select all rows from the hotel_quotes table
+            $sql = "SELECT id, name, checkin, status FROM hotel_quotes WHERE status='pending'";
+            $result = mysqli_query($link, $sql);
 
-// Loop through each row and display the data in the table
-while ($row = mysqli_fetch_assoc($result)) {
-    $id = $row["id"];
-    $name = $row["name"];
-    $outbound_date = date('d/m/Y', strtotime($row["outbound_date"])); // format date to UK format
-    echo "<tr>";
-    echo "<td><a href='view_package_quote.php?id=$id'>$id</a></td>";
-    echo "<td>$name</td>";
-    echo "<td>$outbound_date</td>";
-    echo "<td>";
-    echo "<form method='post' action='update_package_status.php'>";
-    echo "<input type='hidden' name='id' value='" . $row["id"] . "'>";
-    echo "<select name='status' onchange='this.form.submit()'>";
-    echo "<option value='pending' " . ($row["status"] == "pending" ? "selected" : "") . ">Pending</option>";
-    echo "<option value='sent' " . ($row["status"] == "sent" ? "selected" : "") . ">Sent</option>";
-    echo "<option value='closed' " . ($row["status"] == "closed" ? "selected" : "") . ">Closed</option>";
-    echo "</select>";
-    echo "</form>";
-    echo "</td>";
-    echo "</tr>";
-}			
-			// Close the database connection
-			mysqli_close($conn);
-			?>
-                    </tbody>
-                </table>
-            </div>
+            // Loop through each row and display the data in the table
+            while ($row = mysqli_fetch_assoc($result)) {
+                $id = $row["id"];
+                $name = $row["name"];
+                $checkin = date('d/m/Y', strtotime($row["checkin"])); // format date to UK format
+                echo "<tr>";
+                echo "<td><a href='view_hotel_quote.php?id=$id'>$id</a></td>";
+                echo "<td>$name</td>";
+                echo "<td>$checkin</td>";
+                echo "<td>";
+                echo "<form method='post' action='update_hotel_status.php'>";
+                echo "<input type='hidden' name='id' value='" . $row["id"] . "'>";
+                echo "<select name='status' onchange='this.form.submit()'>";
+                echo "<option value='pending' " . ($row["status"] == "pending" ? "selected" : "") . ">Pending</option>";
+                echo "<option value='sent' " . ($row["status"] == "sent" ? "selected" : "") . ">Sent</option>";
+                echo "<option value='closed' " . ($row["status"] == "closed" ? "selected" : "") . ">Closed</option>";
+                echo "</select>";
+                echo "</form>";
+                echo "</td>";
+                echo "</tr>";
+            }
+
+            // Close the result set
+            mysqli_free_result($result);
+            ?>
+        </tbody>
+    </table>
+</div>
+
+<div class="col-md-12">
+    <h1 class="mb-3">Package Quotes</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Outbound Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            // Select all rows from the package_quotes table
+            $sql = "SELECT id, name, outbound_date, status FROM package_quotes WHERE status='pending'";
+            $result = mysqli_query($link, $sql);
+
+            // Loop through each row and display the data in the table
+            while ($row = mysqli_fetch_assoc($result)) {
+                $id = $row["id"];
+                $name = $row["name"];
+                $outbound_date = date('d/m/Y', strtotime($row["outbound_date"])); // format date to UK format
+                echo "<tr>";
+                echo "<td><a href='view_package_quote.php?id=$id'>$id</a></td>";
+                echo "<td>$name</td>";
+                echo "<td>$outbound_date</td>";
+                echo "<td>";
+                echo "<form method='post' action='update_package_status.php'>";
+                echo "<input type='hidden' name='id' value='" . $row["id"] . "'>";
+                echo "<select name='status' onchange='this.form.submit()'>";
+                echo "<option value='pending' " . ($row["status"] == "pending" ? "selected" : "") . ">Pending</option>";
+                echo "<option value='sent' " . ($row["status"] == "sent" ? "selected" : "") . ">Sent</option>";
+                echo "<option value='closed' " . ($row["status"] == "closed" ? "selected" : "") . ">Closed</option>";
+                echo "</select>";
+                echo "</form>";
+                echo "</td>";
+                echo "</tr>";
+            }
+
+            // Close the result set
+            mysqli_free_result($result);
+
+            // Close the database connection
+            mysqli_close($link);
+            ?>
+        </tbody>
+    </table>
+</div>
+
         </div>
         </div>
 
