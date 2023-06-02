@@ -49,7 +49,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
             <a href="welcome.php">
         </svg>
         <span class="fs-5 fw-semibold" style="margin-left: -25px;
-">Your Travel C</span>
+">Your Travel Companion</span>
     </a>
     <ul class="list-unstyled ps-0">
         <li><a href="welcome.php" class="link-dark rounded">Dashboard</a></li>
