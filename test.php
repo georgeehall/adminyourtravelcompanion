@@ -25,8 +25,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@1,500&display=swap" rel="stylesheet">
     <link href="sidebars.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="sidebars.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="sidebars.js"></script>
 
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
@@ -183,7 +183,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         <div class="b-example-divider"></div>
 
         <div class="container" style="padding-top: 20px;">
-            <?php
+        <?php
 	// Check if an ID value was passed as a URL parameter
 	if (isset($_GET["id"])) {
 		$id = $_GET["id"];
@@ -248,8 +248,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 		mysqli_close($conn);
     }
 		?>
-
-        </div>
+           
+            </div>
 
     </main>
 
