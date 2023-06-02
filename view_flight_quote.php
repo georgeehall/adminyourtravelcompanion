@@ -190,7 +190,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 		$id = $_GET["id"];
 		// Connect to the database
         // Include the database configuration file
-        require_once 'config.php';
+        require_once "config.php";
         
 		// Select the row with the matching ID value
 		$sql = "SELECT * FROM flight_quotes WHERE id = $id";

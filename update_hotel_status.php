@@ -9,7 +9,7 @@ $status = $_POST["status"];
 $sql = "UPDATE hotel_quotes SET status='$status' WHERE id=$id";
 if (mysqli_query($link, $sql)) {
     // If the update was successful, redirect the user back to the index page
-    header("Location: welcome.php");
+    header("Location: new_quote_overview.php");
 } else {
     // If there was an error, display an error message
     echo "Error updating record: " . mysqli_error($link);
