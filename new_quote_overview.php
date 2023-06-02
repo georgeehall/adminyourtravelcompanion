@@ -201,7 +201,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                     <tbody>
                         <?php
 			// Connect to the database
-            $conn = mysqli_connect("db5012666464.hosting-data.io", "dbu1038230", "4JmqVgXMg5cRAE", "dbs10642292");
+            $conn = mysqli_connect("localhost", "root", "", "yourtravelcompanion");
 			// Check connection
 			if (!$conn) {
 				die("Connection failed: " . mysqli_connect_error());
@@ -251,7 +251,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                     <tbody>
                         <?php
 			// Connect to the database
-            $conn = mysqli_connect("db5012666464.hosting-data.io", "dbu1038230", "4JmqVgXMg5cRAE", "dbs10642292");
+            $conn = mysqli_connect("localhost", "root", "", "yourtravelcompanion");
 			// Check connection
 			if (!$conn) {
 				die("Connection failed: " . mysqli_connect_error());
@@ -302,7 +302,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                     <tbody>
                         <?php
 			// Connect to the database
-            $conn = mysqli_connect("db5012666464.hosting-data.io", "dbu1038230", "4JmqVgXMg5cRAE", "dbs10642292");
+            $conn = mysqli_connect("localhost", "root", "", "yourtravelcompanion");
 			// Check connection
 			if (!$conn) {
 				die("Connection failed: " . mysqli_connect_error());
