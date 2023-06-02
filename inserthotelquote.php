@@ -1,6 +1,6 @@
 <?php
 // Step 1: Include the config.php file
-require_once 'config.php';
+require_once "config.php";
 // Step 2: Process form data and insert into database table
 $name = $_POST['name'] ?? '';
 $email = $_POST['email'] ?? '';
